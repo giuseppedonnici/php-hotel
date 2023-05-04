@@ -39,6 +39,8 @@ $hotels = [
     ],
 
 ];
+
+$name = $_GET['park'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,13 +74,30 @@ $hotels = [
                         <?php foreach ($hotel as $info) { ?>
                             <td><?php echo $info; ?></td>
                         <?php } ?>
-
                     </tr>
-
                 <?php } ?>
-
             </tbody>
         </table>
+        <form action="index.php" method="GET">
+            <select name="park" id="park">
+                <option value="1">Con parcheggio</option>
+                <option value="0">Senza parcheggio</option>
+            </select>
+            <button type="submit">Filtra</button>
+        </form>
+        <?php if ($name == 1) {
+            foreach ($hotels as $hotel) {
+                if ($hotel['parking']) { ?>
+                    <p class="mt-3"> <?php echo $hotel['name']; ?></p>
+                <?php }
+            }
+        } else {
+            foreach ($hotels as $hotel) {
+                if ($hotel['parking'] === false) { ?>
+                    <p class="mt-3"><?php echo $hotel['name']; ?></p>
+        <?php }
+            }
+        } ?>
     </div>
 </body>
 
